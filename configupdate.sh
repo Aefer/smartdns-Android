@@ -41,6 +41,8 @@ wget --retry-connrefused --waitretry=2 -O hosts_neo.tmp https://cdn.jsdelivr.net
 pid6=$!
 wget -b --retry-connrefused --waitretry=2 -O hosts_hp.tmp https://hosts-file.net/ad_servers.txt
 pid7=$!
+wget -b --retry-connrefused --waitretry=2 -O hosts_adguard.tmp https://raw.githubusercontent.com/r-a-y/mobile-hosts/master/AdguardDNS.txt
+pid8=$!
 wait $pid1
 wait $pid2
 wait $pid3
@@ -48,13 +50,9 @@ wait $pid4
 wait $pid5
 wait $pid6
 wait $pid7
+wait $pid8
 awk '/^2/ {printf"address /%s/%s\n",$2,$1}' hosts_ipv6_lennylxx.tmp > hosts_ipv6_lennylxx
-cat hosts_malware.tmp > hosts_all.tmp
-cat hosts_yhosts.tmp >> hosts_all.tmp
-cat hosts_adwars.tmp >> hosts_all.tmp
-cat hosts_neo.tmp >> hosts_all.tmp
-cat hosts_hp.tmp >> hosts_all.tmp
-cat hosts_PL.tmp >> hosts_all.tmp
+cat hosts_*.tmp > hosts_all.tmp
 sed -i '/^#/d' hosts_all.tmp
 sed -i 's/127.0.0.1/#/' hosts_all.tmp
 sed -i 's/0.0.0.0/#/' hosts_all.tmp
@@ -63,3 +61,9 @@ sort -u hosts_all.tmp > hosts_all.tmp.1
 awk '/^#/ {printf"address /%s/%s\n",$2,$1}' hosts_all.tmp.1 > hosts_all && rm -f hosts_all.tmp.1
 rm -f hosts_*.tmp wget-log*
 tar -cJ -C /tmp -f smartdns.tar.xz --exclude smartdns.tar.xz smartdns
+cd /tmp
+git clone https://github.com/Aefer/smartdns-Android.git
+mv smartdns smartdns-Android/config/configs
+git commit -c "Configs update"
+echo $gitpassword > ~/.gitpassword
+git push
