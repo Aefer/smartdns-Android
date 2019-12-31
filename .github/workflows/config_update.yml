@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Update configs
-    - env: 
+      env: 
         gitpassword: ${{ secrets.gitpassword }}
       run: |
         apt install dos2unix
