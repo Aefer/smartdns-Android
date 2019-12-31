@@ -1,6 +1,8 @@
-name: CI
+name: Auto update configs
 
-on: [push]
+on:
+  schedule:
+    - cron:  '0 0 * * 1'
 
 jobs:
   build:
