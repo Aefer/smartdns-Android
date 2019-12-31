@@ -1,6 +1,7 @@
 name: Auto update configs
 
 on:
+  push:
   schedule:
     - cron:  '0 0 * * 1'
 
