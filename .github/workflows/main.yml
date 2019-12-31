@@ -1,0 +1,15 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Update configs
+      run: |
+        wget https://raw.githubusercontent.com/Aefer/smartdns-Android/master/configupdate.sh && chmod 755 configupdate.sh
+        ./configupdate.sh
