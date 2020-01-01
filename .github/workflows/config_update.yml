@@ -22,7 +22,7 @@ jobs:
         cd ~/work/smartdns-Android/smartdns-Android
         chmod 755 configupdate.sh
         ./configupdate.sh
-        mv -f /tmp/smartdns/ config/configs
+        mv -f /tmp/smartdns/* config/configs/
         echo $gitpassword > ~/.git-credentials
         git config --global user.email $email
         git config --global user.name $username
