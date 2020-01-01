@@ -1,8 +1,8 @@
 name: Auto update configs
 
 on:
+  push:
   schedule:
-    - push:
     - cron:  '0 0 * * 1'
 
 jobs:
