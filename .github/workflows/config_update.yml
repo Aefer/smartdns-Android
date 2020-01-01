@@ -17,8 +17,7 @@ jobs:
         gitpassword: ${{ secrets.gitpassword }}
       run: |
         sudo apt -y install dos2unix
-        cd ~/work/smartdns-Android
-        ls -al
+        cd ~/work/smartdns-Android/smartdns-Android
         ./configupdate.sh
         mv -f /tmp/smartdns/ config/configs
         git commit -c "Configs update"
