@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Update configs
       env: 
         gitpassword: ${{ secrets.gitpassword }}
@@ -20,9 +20,6 @@ jobs:
         wget https://raw.githubusercontent.com/Aefer/smartdns-Android/master/configupdate.sh && chmod 755 configupdate.sh
         ./configupdate.sh
         cd ~/work/smartdns-Android
-        rm -rf config/configs
-        ls -al /tmp
-        mv -f /tmp/smartdns config/configs
+        mv -f /tmp/smartdns/ config/configs
         git commit -c "Configs update"
-        #echo $gitpassword > ~/.gitpassword
         git push
