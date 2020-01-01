@@ -22,6 +22,6 @@ jobs:
         ./configupdate.sh
         mv -f /tmp/smartdns/ config/configs
         echo $gitpassword > ~/.git-credentials
-        git add *
+
         git commit -m "Configs update"
         git push
