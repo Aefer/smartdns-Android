@@ -17,9 +17,8 @@ jobs:
         gitpassword: ${{ secrets.gitpassword }}
       run: |
         sudo apt -y install dos2unix
-        wget https://raw.githubusercontent.com/Aefer/smartdns-Android/master/configupdate.sh && chmod 755 configupdate.sh
-        ./configupdate.sh
         cd ~/work/smartdns-Android
+        ./configupdate.sh
         mv -f /tmp/smartdns/ config/configs
         git commit -c "Configs update"
         git push
