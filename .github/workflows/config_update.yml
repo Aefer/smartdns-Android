@@ -1,7 +1,6 @@
 name: Auto update configs
 
 on:
-  push:
   schedule:
     - cron:  '0 0 * * 1'
 
@@ -21,6 +20,7 @@ jobs:
         ./configupdate.sh
         cd ~/work/smartdns-Android
         rm -rf config/configs
+        ls -al /tmp
         mv -f /tmp/smartdns config/configs
         git commit -c "Configs update"
         #echo $gitpassword > ~/.gitpassword
