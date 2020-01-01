@@ -61,9 +61,3 @@ sort -u hosts_all.tmp > hosts_all.tmp.1
 awk '/^#/ {printf"address /%s/%s\n",$2,$1}' hosts_all.tmp.1 > hosts_all && rm -f hosts_all.tmp.1
 rm -f hosts_*.tmp wget-log*
 tar -cJ -C /tmp -f smartdns.tar.xz --exclude smartdns.tar.xz smartdns
-cd /tmp
-git clone https://github.com/Aefer/smartdns-Android.git
-mv smartdns smartdns-Android/config/configs
-git commit -c "Configs update"
-echo $gitpassword > ~/.gitpassword
-git push
