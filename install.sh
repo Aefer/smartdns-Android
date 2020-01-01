@@ -94,6 +94,7 @@ print_modname() {
 	ui_print " Smartdns - Android"
 	ui_print " $version"
 	ui_print " module by x4455"
+	ui_print " modified by DuhaPT"
 	ui_print "****************"
 }
 

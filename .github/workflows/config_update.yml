@@ -22,6 +22,7 @@ jobs:
         chmod 755 configupdate.sh
         ./configupdate.sh
         mv -f /tmp/smartdns/* config/configs/
+        rm -f config/configs/gfwlist.conf config/configs/hosts_ipv6_lennylxx
         echo $gitpassword > ~/.git-credentials
         git config --global user.email $email
         git config --global user.name $username
