@@ -1,8 +1,9 @@
 name: Auto update configs
 
 on:
+  push:
   schedule:
-    - cron:  '0 0 * * 1'
+    - cron:  '0 0 * * 0'
 
 jobs:
   build:
@@ -23,9 +24,9 @@ jobs:
         ./configupdate.sh
         mv -f /tmp/smartdns/* config/configs/
         rm -f config/configs/gfwlist.conf config/configs/hosts_ipv6_lennylxx
-        echo $gitpassword > ~/.git-credentials
-        git config --global user.email $email
-        git config --global user.name $username
-        git add *
-        git commit -m "Configs update"
-        git push
+
+    - name: GitHub Push
+    - uses: ad-m/github-push-action@v0.5.0
+      with:
+        github_token: $\{{ secrets.GITHUB_TOKEN }}
+        #directory: ~/work/smartdns-Android/smartdns-Android
