@@ -13,10 +13,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Update configs
-      env: 
-        gitpassword: ${{ secrets.gitpassword }}
-        username: ${{ secrets.username }}
-        email: ${{ secrets.email }}
       run: |
         sudo apt -y install dos2unix
         cd ~/work/smartdns-Android/smartdns-Android
@@ -29,4 +25,3 @@ jobs:
       uses: ad-m/github-push-action@v0.5.0
       with:
         github_token: $\{{ secrets.GITHUB_TOKEN }}
-        #directory: ~/work/smartdns-Android/smartdns-Android
