@@ -13,6 +13,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Update configs
+      env:
+        username: ${{ secrets.username }}
+        email: ${{ secrets.email }}
       run: |
         sudo apt -y install dos2unix
         cd ~/work/smartdns-Android/smartdns-Android
@@ -20,6 +23,10 @@ jobs:
         ./configupdate.sh
         mv -f /tmp/smartdns/* config/configs/
         rm -f config/configs/gfwlist.conf config/configs/hosts_ipv6_lennylxx
+        git config --global user.email $email
+        git config --global user.name $username
+        git add .
+        git commit -m 'Update hosts'
 
     - name: GitHub Push
       uses: ad-m/github-push-action@v0.5.0
