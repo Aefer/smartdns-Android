@@ -102,7 +102,7 @@ on_install() {
   # The following is the default implementation: extract $ZIPFILE/system to $MODPATH
   # Extend/change the logic to whatever you want
 	ui_print "- Extracting module files"
-	unzip -o "$ZIPFILE" 'system/*' 'core/*' -d $MODPATH >&2
+	unzip -o "$ZIPFILE" 'core/*' 'config/*' -d $MODPATH >&2
 
 	imageless_magisk || { abort '(!) Please update Magisk to 18.1+.'; }
 
@@ -131,16 +131,6 @@ on_install() {
 		cp -af $BINARY_PATH $MODPATH/core/$CORE_BINARY
 	else
 		abort "(E) $ARCH binary file missing."
-	fi
-
-	if [ $(ls $DATA_INTERNAL_DIR | wc -l) -eq 0 ]; then
-		unzip -o "$ZIPFILE" 'config/*' -d $TMPDIR >&2
-		mkdir -p $DATA_INTERNAL_DIR 2>/dev/null
-		cp -rf $TMPDIR/config/* $DATA_INTERNAL_DIR
-		ui_print ""
-		ui_print '(!!!) You need to configure upstream DNS servers.'
-		ui_print ""
-		sleep 5
 	fi
 
 	cp -af $TMPDIR/constant.sh $MODPATH/constant.sh

@@ -3,15 +3,20 @@
 # Listening port set in the config
 Listen_PORT=6453
 
-# Server permission [radio/root] (Some operations may want to use root)
-ServerUID='radio'
+# Server permission [radio/root] (Some operations may want to use radio)
+ServerUID='root'
 
 # iptables block IPv6 port 53 [true/false]
 ip6t_block=true
 
 # iptables anti-http 302 hijacking [true/false]
-ipt_anti302=false
+ipt_anti302=true
 
+# iptables anti-DNS poisoning [true/false]
+ipt_antipoisoning=true
+
+# iptables anti-http dns [true/false]
+ipt_antihttpdns=true
 
 ## Constant  (If you don't know what you are doing, don't modify it.)
 

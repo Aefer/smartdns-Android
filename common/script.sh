@@ -19,6 +19,10 @@ Valid options are:
         anti-http 302 hijacking
     -ip6block [true/false]
         block IPv6 port 53
+    -antipoisoning [true/false]
+        anti-DNS poisoning
+    -antihttpdns [true/false]
+        anti-http dns
 EOF
 	exit $1
 }
@@ -77,6 +81,19 @@ iptrules_load() {
 	#anti http 303
 	if [ $ipt_anti302 ]; then
 		$1 -t filter $2 INPUT -p tcp -m tcp --sport 80 --tcp-flags SYN,RST,URG FIN,PSH,ACK -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 -j DROP
+	fi
+
+	#anti DNS poisoning
+	if [ $ipt_antipoisoning ]; then
+		$1 $2 INPUT -p udp --sport 53 -m u32 --u32 "2&0xFFFF=0x0" -j DROP
+		$1 $2 INPUT -p udp --sport 53 -m u32 --u32 "4&0xFFFF=0x4000" -j DROP
+	fi
+
+	#anti httpdns
+	if [ $ipt_antihttpdns ]; then
+		$1 $2 INPUT -p tcp -d 119.29.29.29 -m tcp --dport 80 -j REJECT --reject-with tcp-reset
+		$1 $2 INPUT -p tcp -d 180.76.76.200 -m tcp --dport 80 -j REJECT --reject-with tcp-reset
+		$1 $2 INPUT -p tcp -d 180.76.76.200 -m tcp --dport 443 -j REJECT --reject-with tcp-reset
 	fi
 }
 

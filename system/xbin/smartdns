@@ -1,4 +1,0 @@
-#!/system/bin/sh
-
-echo 'ERROR'
-exit 1
